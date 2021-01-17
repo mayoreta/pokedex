@@ -46,6 +46,7 @@ export const detailPokemon = (id) => {
             }
 
             let pokemon = {
+                id: id,
                 name: ucfirst(data.name),
                 moves: moves.join(", "),
                 type: type.join(", "),

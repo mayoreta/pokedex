@@ -3,19 +3,19 @@ import { Row, Col, ListGroup, Image, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getDetailPokemon } from '../actions/pokemon_action';
-import { errorDialog } from '../components/dialog';
+import { errorDialog, catchPokemonDialog } from '../components/dialog';
 
 const DetailPokemonPage = () => {
     const dispatch = useDispatch();
     const dataPokemon = useSelector(state => state.detailPokemon.isLoaded);
 
-    const catchPokemon = () => {
+    const catchPokemon = (pokemon) => {
         let chance = Math.round(Math.random());
-        
+
         if (chance === 0) {
-            errorDialog("Failed");
+            errorDialog("Oops.. try again");
         } else {
-            console.log("Catched");
+            catchPokemonDialog(pokemon);
         }
     }
 
@@ -59,7 +59,7 @@ const DetailPokemonPage = () => {
                             </Row>
                         </ListGroup.Item>
                     </ListGroup>
-                    <Button onClick={() => catchPokemon()} className="mx-auto d-block mt-3">Catch</Button>
+                    <Button onClick={() => catchPokemon(dataPokemon)} className="mx-auto d-block mt-3">Catch</Button>
                 </Col>
             </Row>
         </>
